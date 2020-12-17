@@ -1,7 +1,7 @@
 
 import os
 print(os.getcwd())
-os.chdir("C:/Users/Pragadeesh/Documents/Resolute Ai/Intern/Task 2/faced-master/")
+os.chdir(".../faced-master/")
 
 import cv2
 from faced import FaceDetector
@@ -11,19 +11,19 @@ from time import process_time
 #___________________________________________________For Image______________________________________________________
 face_detector = FaceDetector()
 
-img = cv2.imread("C:/Users/Pragadeesh/Documents/Resolute Ai/Intern/Task 2/faced-master/face_det.jpg")
+img = cv2.imread("face_det.jpg")
 
 rgb_img = cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB)
 
 # Receives RGB numpy image (HxWxC) and
 # returns (x_center, y_center, width, height, prob) tuples. 
-bboxes = face_detector.predict(rgb_img, 0.5)
+bboxes = face_detector.predict(rgb_img, 0.7)
 
 # Use this utils function to annotate the image.
 ann_img = annotate_image(img, bboxes)
 
 #save img
-cv2.imwrite('C:/Users/Pragadeesh/Documents/Resolute Ai/Intern/Task 2/faced-master/face_detd.jpg', ann_img)
+cv2.imwrite('face_detd.jpg', ann_img)
 
 # Show the image
 cv2.imshow('Result',ann_img)
@@ -31,7 +31,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 #____________________________________________________For Video_______________________________________________________
-video='C:/Users/Pragadeesh/Documents/Resolute Ai/Intern/Task 2/Vid7.mp4'
+video='Vid.mp4'
 cap = cv2.VideoCapture(video)
 face_detector = FaceDetector()
 
@@ -40,9 +40,7 @@ frame_height = int(cap.get(4))
    
 size = (frame_width, frame_height)
 
-result = cv2.VideoWriter('Face_det_out.mp4',  
-                          cv2.VideoWriter_fourcc(*'XVID'), 
-                          15, size)
+result = cv2.VideoWriter('Face_det_out.mp4',cv2.VideoWriter_fourcc(*'XVID'), 15, size)
 pro_time=[]
 while(True):
     t1_start = process_time() 
@@ -52,7 +50,7 @@ while(True):
 
         # Receives RGB numpy image (HxWxC) and
         # returns (x_center, y_center, width, height, prob) tuples. 
-        bboxes = face_detector.predict(rgb_img, 0.9)
+        bboxes = face_detector.predict(rgb_img, 0.7)
 
         # Use this utils function to annotate the image.
         ann_img = annotate_image(frame, bboxes)
